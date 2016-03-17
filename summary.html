@@ -1,0 +1,115 @@
+<!--
+ - Copyright (c) 2015 Memorial Sloan-Kettering Cancer Center.
+ -
+ - This library is distributed in the hope that it will be useful, but WITHOUT
+ - ANY WARRANTY, WITHOUT EVEN THE IMPLIED WARRANTY OF MERCHANTABILITY OR FITNESS
+ - FOR A PARTICULAR PURPOSE. The software and documentation provided hereunder
+ - is on an "as is" basis, and Memorial Sloan-Kettering Cancer Center has no
+ - obligations to provide maintenance, support, updates, enhancements or
+ - modifications. In no event shall Memorial Sloan-Kettering Cancer Center be
+ - liable to any party for direct, indirect, special, incidental or
+ - consequential damages, including lost profits, arising out of the use of this
+ - software and its documentation, even if Memorial Sloan-Kettering Cancer
+ - Center has been advised of the possibility of such damage.
+ --%>
+
+<%--
+ - This file is part of cBioPortal.
+ -
+ - cBioPortal is free software: you can redistribute it and/or modify
+ - it under the terms of the GNU Affero General Public License as
+ - published by the Free Software Foundation, either version 3 of the
+ - License.
+ -
+ - This program is distributed in the hope that it will be useful,
+ - but WITHOUT ANY WARRANTY; without even the implied warranty of
+ - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ - GNU Affero General Public License for more details.
+ -
+ - You should have received a copy of the GNU Affero General Public License
+ - along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<meta charset="utf-8"/>
+    <script typw="text/javascript" src="plotly-latest.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> 
+</head>
+
+<style type="text/css" title="currentStyle">
+#genomic-overview-tip {
+    position : absolute;
+    border : 0px solid gray;
+    background-color : #efefef;
+    padding : 3px;
+    z-index : 1000;
+    max-width : 300px;
+}
+.ui-tooltip, .qtip{
+	position: absolute;
+	left: -10000em;
+	top: -10000em;
+ 
+	max-width: 600px;
+	min-width: 50px;
+}
+.patient-view-scatter-qtip-wide {
+    max-width: 600px !important;
+}
+</style>
+
+
+<script type="text/javascript" src="genomic-overview.js"></script>
+
+
+<script type="text/javascript" >
+    var dataAttr = {};
+    var dataArr = [];
+    $(document).ready(function(){
+        initGenomicsOverview();
+    });
+
+    function initGenomicsOverview() {
+        var chmInfo = new ChmInfo();
+        var genomic_overview_length = $("#td-content").width() - 75;
+        var showMutCnaPlot = false;//genomicEventObs.hasMut&&genomicEventObs.hasSeg;
+        genomic_overview_length -= 110;
+        genomic_overview_length -= 110;
+        var config = new GenomicOverviewConfig(2,1150);
+        plotChromosomes(config,chmInfo,"myDiv");
+    }
+</script>
+
+<style>
+
+legend.legend-border {
+    font-size: 12px !important;
+    text-align: left !important;
+    width:auto;
+    padding:0 10px;
+    border-bottom:none;
+    color:#1974b8;
+    margin-bottom: 0px;
+}
+#mutation_summary_table tbody tr div {
+    white-space: nowrap;
+}
+</style>
+
+
+<body>
+<fieldset class="fieldset-border ui-widget-content">
+<legend class="legend-border">Genomic Overview</legend>
+<table>
+    <tr>
+        <td><div id="myDiv"></div></td>
+    </tr>
+</table>
+
+</fieldset>
+
+</body>
+</html>
